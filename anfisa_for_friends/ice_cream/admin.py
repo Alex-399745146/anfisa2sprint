@@ -5,10 +5,6 @@ from .models import Category, IceCream, Topping, Wrapper
 # Этот вариант сработает для всех моделей приложения.
 # Вместо пустого значения в админке будет отображена строка "Не задано".
 admin.site.empty_value_display = 'Не задано'
-#admin.site.register(Category)
-#admin.site.register(Topping)
-#admin.site.register(Wrapper)
-#admin.site.register(IceCream)
 
 
 # Подготавливаем модель IceCream для вставки на страницу другой модели.

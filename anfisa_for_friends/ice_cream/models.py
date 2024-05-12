@@ -4,22 +4,44 @@ from core.models import PublishedModel
 
 
 class Category(PublishedModel):
-    title = models.CharField(max_length=256)
-    slug = models.SlugField(max_length=64, unique=True)
-    output_order = models.PositiveSmallIntegerField(default=100)
+    title = models.CharField(max_length=256, verbose_name='Название')
+    slug = models.SlugField(max_length=64, unique=True, verbose_name='Слаг')
+    output_order = models.PositiveSmallIntegerField(default=100, verbose_name='Порядок отображения')
+
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.title
 
 
 class Topping(PublishedModel):
-    title = models.CharField(max_length=256)
-    slug = models.SlugField(max_length=64, unique=True)
+    title = models.CharField(max_length=256, verbose_name='Название')
+    slug = models.SlugField(max_length=64, unique=True, verbose_name='Слаг')
+
+    class Meta:
+        verbose_name = 'топпинг'
+        verbose_name_plural = 'Топпинги'
+
+    def __str__(self):
+        return self.title
 
 
 class Wrapper(PublishedModel):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=256, verbose_name='Название')
+
+    class Meta:
+        verbose_name = 'обёртка'
+        verbose_name_plural = 'Обёртки'
+
+    def __str__(self):
+        return self.title
 
 
 class IceCream(PublishedModel):
-    title = models.CharField(max_length=256)
+    is_on_main = models.BooleanField(default=False, verbose_name='На главную')
+    title = models.CharField(max_length=256, verbose_name='Название')
     description = models.TextField()
     wrapper = models.OneToOneField(
         Wrapper,
@@ -32,7 +54,13 @@ class IceCream(PublishedModel):
         Category,
         on_delete=models.CASCADE,
         related_name='ice_creams',
+        verbose_name='Категория'
     )
     toppings = models.ManyToManyField(Topping)
-    is_on_main = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'морожено'
+        verbose_name_plural = 'Мороженое'
+
+    def __str__(self):
+        return self.title
